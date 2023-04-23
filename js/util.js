@@ -1,4 +1,4 @@
-export function showAlert(message) {
+export const showAlert = (message) => {
   const alertContainer = document.createElement('div');
   alertContainer.style.zIndex = '100';
   alertContainer.style.position = 'absolute';
@@ -18,4 +18,4 @@ export function showAlert(message) {
   setTimeout(() => {
     alertContainer.remove();
   }, 3000);
-}
+};

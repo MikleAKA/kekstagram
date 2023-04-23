@@ -4,55 +4,43 @@ import {sendData} from './server.js';
 const form = document.querySelector('.img-upload__form');
 const regex = new RegExp('^#[а-яa-zA-ZА-ЯёЁ0-9]{1,19}$');
 
-const pristineComment  = new Pristine (form, {
-  classTo: 'img-upload__text',
+const pristine  = new Pristine (form, {
+  classTo: 'img-upload__field-wrapper',
   errorClass: 'form--invalid',
   successClass: 'form--valid',
-  errorTextParent: 'img-upload__text',
+  errorTextParent: 'img-upload__field-wrapper',
   errorTextTag: 'span',
   errorTextClass: 'form__error'
 });
 
-const pristineHashTag  = new Pristine (form, {
-  classTo: 'img-upload__text',
-  errorClass: 'form--invalid',
-  successClass: 'form--valid',
-  errorTextParent: 'img-upload__text',
-  errorTextTag: 'span',
-  errorTextClass: 'form__error'
-});
+const validateComment = (value) => value.length >= 20 && value.length <= 140;
 
-function validateComment (value) {
-  return value.length >= 20 && value.length <= 140;
-}
+const validateHashTag = (value) => regex.test(value) && value.length >= 2;
 
-function validateHashTag (value) {
-  return regex.test(value) && value.length >= 2;
-}
-
-pristineComment.addValidator(
+pristine.addValidator(
   form.querySelector('.text__description'),
   validateComment,
-  'Комментарий должен быть от 20 до 140 символов'
+  'Комментарий должен быть от 20 до 140 символов',
+  10
 );
 
-pristineHashTag.addValidator(
+pristine.addValidator(
   form.querySelector('.text__hashtags'),
   validateHashTag,
-  'Хэштег должен начинаться с # и быть от 1 до 19 символов'
+  'Хэштег должен начинаться с # и быть от 1 до 19 символов',
+  0
 );
 
 form.addEventListener('submit', (evt) => {
   evt.preventDefault();
-  if(pristineHashTag.validate() && pristineComment.validate()) {
-    //blockSubmitButton(evt)
-    evt.target.querySelector('.img-upload__submit').disabled = true;
-    sendData( () => {
-      //unblockSubmitButton
-      evt.target.querySelector('.img-upload__submit').disabled = false;
-    },
-    new FormData(evt.target)
-    );
-    closeImgUpload();
+  if(!pristine.validate()) {
+    return;
   }
+  evt.target.querySelector('.img-upload__submit').disabled = true;
+  sendData( () => {
+    evt.target.querySelector('.img-upload__submit').disabled = false;
+  },
+  new FormData(evt.target)
+  );
+  closeImgUpload();
 });

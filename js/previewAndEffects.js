@@ -13,11 +13,11 @@ const scaleControlBigger = imgUpload.querySelector('.scale__control--bigger');
 
 let currentScale = DEFAULT_SCALE;
 
-function updateScale(scale) {
+const updateScale = (scale) => {
   currentScale = scale;
   imgPreview.style.transform = `scale(${currentScale / 100})`;
   scaleControlValue.value = `${currentScale}%`;
-}
+};
 
 scaleControlSmaller.addEventListener('click', () => {
   if (currentScale > MIN_SCALE) {
@@ -61,10 +61,13 @@ noUiSlider.create(slider, {
 });
 slider.classList.add('hidden');
 
-function updateEffect(currentFilter) {
-  effectsPreview.className = 'img-upload__preview';
+let lastFilter = null;
+
+const updateEffect = (currentFilter) => {
+  effectsPreview.classList.remove(lastFilter);
   if (currentFilter !== 'none') {
     effectsPreview.classList.add(effectsClasses[currentFilter]);
+    lastFilter = effectsClasses[currentFilter];
     slider.classList.remove('hidden');
     slider.noUiSlider.updateOptions({
       range: {
@@ -82,7 +85,7 @@ function updateEffect(currentFilter) {
     slider.classList.add('hidden');
     effectsPreview.style.filter = '';
   }
-}
+};
 
 const effectsList = document.querySelector('.effects__list');
 effectsList.addEventListener('change', (event) => {
@@ -90,8 +93,8 @@ effectsList.addEventListener('change', (event) => {
   updateEffect(filter);
 });
 
-export function clearSlider()  {
+export const clearSlider = () => {
   effectsPreview.className = 'img-upload__preview';
   slider.classList.add('hidden');
   effectsPreview.style.filter = '';
-}
+};
