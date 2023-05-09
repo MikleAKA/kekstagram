@@ -1,4 +1,3 @@
-import { closeImgUpload } from './openPict.js';
 import {sendData} from './server.js';
 
 const form = document.querySelector('.img-upload__form');
@@ -42,5 +41,4 @@ form.addEventListener('submit', (evt) => {
   },
   new FormData(evt.target)
   );
-  closeImgUpload();
 });

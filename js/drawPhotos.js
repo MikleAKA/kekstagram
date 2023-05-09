@@ -1,10 +1,9 @@
 import {fetchData} from './server.js';
 
-const pictureTemplate = document.querySelector('#picture').content;
-const pictures = document.querySelector('.pictures');
-const fragment = new DocumentFragment();
-
-const miniature = (photos) => {
+export const miniature = (photos) => {
+  const pictureTemplate = document.querySelector('#picture').content;
+  const pictures = document.querySelector('.pictures');
+  const fragment = new DocumentFragment();
   photos.forEach((photo) => {
     const template = pictureTemplate.cloneNode(true);
     const img = template.querySelector('.picture__img');
