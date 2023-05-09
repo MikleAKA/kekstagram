@@ -64,7 +64,6 @@ slider.classList.add('hidden');
 let lastFilter = null;
 
 const updateEffect = (currentFilter) => {
-  localStorage.setItem('currentFilter', currentFilter);
   if (currentFilter !== 'none') {
     effectsPreview.classList.add(effectsClasses[currentFilter]);
     lastFilter = effectsClasses[currentFilter];

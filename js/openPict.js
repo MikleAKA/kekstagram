@@ -1,48 +1,59 @@
 import {clearSlider} from './previewAndEffects.js';
 import {updateScale} from './previewAndEffects.js';
 
-const imgUpload = document.querySelector('.img-upload__overlay');
-const fileInput = document.querySelector('.img-upload__input');
-const closeImgUploadButton = document.querySelector('.img-upload__cancel');
-const form = document.querySelector('.img-upload__form');
-const submitButton = document.querySelector('.img-upload__submit');
+const getData = () => {
+  const imgUpload = document.querySelector('.img-upload__overlay');
+  const fileInput = document.querySelector('.img-upload__input');
+  const closeImgUploadButton = document.querySelector('.img-upload__cancel');
+  const form = document.querySelector('.img-upload__form');
+  const submitButton = document.querySelector('.img-upload__submit');
+  return {
+    imgUpload,
+    fileInput,
+    closeImgUploadButton,
+    form,
+    submitButton
+  };
+};
 
-const openImgUpload = () => {
-  fileInput.removeEventListener('change', openImgUpload);
-  imgUpload.classList.remove('hidden');
+export const openImgUpload = () => {
+  const data = getData();
+  data.fileInput.removeEventListener('change', openImgUpload);
+  data.imgUpload.classList.remove('hidden');
   document.body.classList.add('modal-open');
   document.addEventListener('keydown', escapeKeyHandler);
   const img = document.querySelector('.img-upload__preview').querySelector('img');
-  img.src = window.URL.createObjectURL(fileInput.files[0]);
+  img.src = window.URL.createObjectURL(data.fileInput.files[0]);
 };
 
 export const closeImgUpload = () => {
-  fileInput.addEventListener('change', openImgUpload);
-  imgUpload.classList.add('hidden');
+  const data = getData();
+  data.imgUpload.classList.add('hidden');
   document.body.classList.remove('modal-open');
   document.removeEventListener('keydown', escapeKeyHandler);
-  fileInput.addEventListener('change', openImgUpload);
-  form.reset();
+  data.fileInput.addEventListener('change', openImgUpload);
+  data.form.reset();
   clearSlider();
   updateScale(100);
-  submitButton.disabled = false;
+  data.submitButton.disabled = false;
 };
 
-function escapeKeyHandler(evt) {
+export function escapeKeyHandler(evt) {
   if(evt.key === 'Escape'){
     closeImgUpload();
   }
 }
 
-fileInput.addEventListener('change', openImgUpload);
-closeImgUploadButton.addEventListener('click', closeImgUpload);
+const dataFirst = getData();
+dataFirst.fileInput.addEventListener('change', openImgUpload);
+dataFirst.closeImgUploadButton.addEventListener('click', closeImgUpload);
 
 export const closeImgUploadWithError = () => {
-  fileInput.addEventListener('change', openImgUpload);
-  imgUpload.classList.add('hidden');
+  const data = getData();
+  data.imgUpload.classList.add('hidden');
   document.body.classList.remove('modal-open');
   document.removeEventListener('keydown', escapeKeyHandler);
-  fileInput.addEventListener('change', openImgUpload);
-  form.reset();
-  submitButton.disabled = false;
+  data.fileInput.addEventListener('change', openImgUpload);
+  data.form.reset();
+  data.submitButton.disabled = false;
 };

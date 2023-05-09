@@ -12,7 +12,6 @@ export const miniature = (photos) => {
     img.src = photo.url;
     likes.textContent = photo.likes;
     comments.textContent = photo.comments;
-
     fragment.append(template);
   });
 
