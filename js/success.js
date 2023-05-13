@@ -1,4 +1,4 @@
-import {closeImgUpload} from './openPict.js';
+import {closeImgUpload} from './open-picture.js';
 
 const getData = () => {
   const success = document.querySelector('#success').content.cloneNode(true);

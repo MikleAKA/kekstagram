@@ -1,8 +1,8 @@
 import {showError} from './error.js';
 import {showSuccess} from './success.js';
-import {showErrorFetch} from './errorFetch.js';
+import {showErrorFetch} from './error-fetch.js';
 
-const SERVER_URL = 'https://27.javscript.pages.academy/kekstagram-simple';
+const SERVER_URL = 'https://27.javascript.pages.academy/kekstagram-simple';
 
 
 export const fetchData = (onSuccess) => {

@@ -1,2 +1,2 @@
-import './drawPhotos.js';
+import './draw-photos.js';
 import './valid.js';

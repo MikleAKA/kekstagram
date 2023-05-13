@@ -1,4 +1,4 @@
-import {closeImgUploadWithError} from './openPict.js';
+import {closeImgUploadWithError} from './open-picture.js';
 
 const getData = () => {
   const error = document.querySelector('#error').content.cloneNode(true);
@@ -42,16 +42,7 @@ function hideError () {
 }
 
 export const showError = () => {
-  const hashtagsInput = document.querySelector('.text__hashtags');
-  const hashtagsValue = hashtagsInput.value;
-  const commentInput = document.querySelector('.text__description');
-  const commentValue = commentInput.value;
-  const scaleInput = document.querySelector('.scale__control--value');
-  const scaleValue = scaleInput.value;
   closeImgUploadWithError();
-  hashtagsInput.value = hashtagsValue;
-  commentInput.value = commentValue;
-  scaleInput.value = scaleValue;
   const data = getData();
   data.body.append(data.error);
   data.errorButton.addEventListener('click', newFile);

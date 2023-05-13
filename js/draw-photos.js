@@ -1,6 +1,6 @@
 import {fetchData} from './server.js';
 
-export const miniature = (photos) => {
+const miniature = (photos) => {
   const pictureTemplate = document.querySelector('#picture').content;
   const pictures = document.querySelector('.pictures');
   const fragment = new DocumentFragment();

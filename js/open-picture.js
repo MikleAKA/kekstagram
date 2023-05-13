@@ -1,5 +1,5 @@
-import {clearSlider} from './previewAndEffects.js';
-import {updateScale} from './previewAndEffects.js';
+import {clearSlider} from './preview-and-effects.js';
+import {updateScale} from './preview-and-effects.js';
 
 const getData = () => {
   const imgUpload = document.querySelector('.img-upload__overlay');
@@ -53,7 +53,7 @@ export const closeImgUploadWithError = () => {
   data.imgUpload.classList.add('hidden');
   document.body.classList.remove('modal-open');
   document.removeEventListener('keydown', escapeKeyHandler);
+  data.fileInput.value = '';
   data.fileInput.addEventListener('change', openImgUpload);
-  data.form.reset();
   data.submitButton.disabled = false;
 };
